@@ -1,0 +1,96 @@
+﻿@model OhNoAir.Models.Search
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Search for tickets</h2>
+
+
+
+<form asp-controller="Search" asp-action="Index">
+    <p>
+        From: <input type="text" name="From" />
+        To: <input type="text" name="To" />
+        Depart Date: <input type="text" name="DepartDate" />
+        Return: <input type="text" name="ReturnDate" />
+        <input type="submit" value="Search" />
+    </p>
+</form>
+
+<p>Depart: </p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Departs[0].FlightID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departs[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departs[0].Price)
+            </th>      
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Departs)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
+                    <a asp-action="Details" asp-route-id="@item.FlightID">Details</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+<p>Return: </p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Returns[0].FlightID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Returns[0].Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Returns[0].Price)
+            </th>      
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Returns)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FlightID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Date)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Price)
+                </td>
+                <td>
+                    <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
+                    <a asp-action="Details" asp-route-id="@item.FlightID">Details</a> 
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
