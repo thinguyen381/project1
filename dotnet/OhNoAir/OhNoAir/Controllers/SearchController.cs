@@ -11,6 +11,8 @@ namespace OhNoAir.Controllers
 
             string s = "";
 
+            //testing
+
 
             string departQueryString = $"Declare @FromID int, @ToID int;" +
                 $" Select @FromID = DestinationID from Project1..Destination where DestinationName = '{From}';" +
