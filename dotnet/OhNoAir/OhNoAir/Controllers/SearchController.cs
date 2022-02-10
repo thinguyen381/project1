@@ -38,6 +38,13 @@ namespace OhNoAir.Controllers
             result.Departs = departFlights;
             result.Returns = returnFlights;
 
+            if (From != null && To != null)
+            {
+                result.Depart = $"From: {From}    To: {To}";
+                result.Return = $"From: {To}    To: {From}";
+            }
+            
+
             return View(result);
             //var movies = from m in _context.Movie
             //             select m;
