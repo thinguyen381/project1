@@ -12,6 +12,7 @@ namespace OhNoAir.Controllers
             string s = "";
 
             //testing
+            //testing 2
 
 
             string departQueryString = $"Declare @FromID int, @ToID int;" +
