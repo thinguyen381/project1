@@ -7,90 +7,151 @@
 <h2>Search for tickets</h2>
 
 
-
-<form asp-controller="Search" asp-action="Index">
-    <p>
-        From: <input type="text" name="From" />
-        To: <input type="text" name="To" />
-        Depart Date: <input type="text" name="DepartDate" />
-        Return: <input type="text" name="ReturnDate" />
-        <input type="submit" value="Search" />
-    </p>
-</form>
-
-<p>Depart: </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Departs[0].FlightID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Departs[0].Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Departs[0].Price)
-            </th>      
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Departs)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FlightID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
-                    <a asp-action="Details" asp-route-id="@item.FlightID">Details</a> 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div class="container border" style="padding:20px">
 
 
-<p>Return: </p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Returns[0].FlightID)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Returns[0].Date)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Returns[0].Price)
-            </th>      
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.Returns)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FlightID)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Date)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Price)
-                </td>
-                <td>
-                    <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
-                    <a asp-action="Details" asp-route-id="@item.FlightID">Details</a> 
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+    <form asp-controller="Search" asp-action="Index">
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Departure City:
+            </div>
+            <div class="col-5 ">
+                <select asp-for=From asp-items="@(new SelectList(Model.Destinations, "DestinationID", "DestinationName"))" class="form-control">
+                    <option selected value="">Choose...</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Destination City:
+            </div>
+            <div class="col-5">
+                <select asp-for=To asp-items="@(new SelectList(Model.Destinations, "DestinationID", "DestinationName"))" class="form-control">
+                    <option selected value="">Choose...</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Departure:
+            </div>
+            <div class="col-5">
+                <input type="text" name="DepartDate" value="@Model.DepartDate?.ToString("MM-dd-yyyy")" class="datepicker form-control" />
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Return:
+            </div>
+            <div class="col-5">
+                <input type="text" name="ReturnDate" value="@Model.ReturnDate?.ToString("MM-dd-yyyy")" class="datepicker form-control" />
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-3">
+                <input type="submit" value="Search" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </form>
+</div>
+
+@section Scripts{
+<script>
+    $(document).ready(function () {
+       $(".datepicker").datepicker({
+          dateFormat: "mm-dd-yy",
+          changemonth: true,
+          changeyear: true
+          });
+       });
+</script>
+
+}
+
+@if (Model.Departs != null)
+{
+    <div class="container border" style="padding:20px">
+        <p>Depart: </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departs[0].FlightID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departs[0].Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Departs[0].Price)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Departs)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FlightID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        @*                    <td>
+                            <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
+                            <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+@if (Model.Returns != null)
+{
+    <div class="container border" style="padding:20px">
+        <p>Return: </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Returns[0].FlightID)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Returns[0].Date)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Returns[0].Price)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Returns)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FlightID)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Price)
+                        </td>
+                        @*<td>
+                            <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
+                            <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
+                            </td>*@
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}

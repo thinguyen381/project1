@@ -1,11 +1,5 @@
 use project1
 go
-
-Create table Destination(
-	DestinationID int,
-	DestinationName varchar(200)
-)
-
 Create table Flight(
 	FlightID int,
 	Date DateTime,
@@ -14,8 +8,21 @@ Create table Flight(
 	ToID int
 )
 
+Create table Invoice(
+	InvoiceID int,
+	CustomerID int
+)
 
+Create table Line(
+	LineID int,
+	OrderID int,
+	ScheduleID int
+)
 
+Create table Destination(
+	DestinationID int,
+	DestinationName varchar(200)
+)
 
 
 --Create table Class(

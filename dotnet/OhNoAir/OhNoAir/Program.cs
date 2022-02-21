@@ -1,7 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using OhNoAir.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+var cn = builder.Configuration.GetConnectionString("Project1");
+builder.Services.AddDbContext<ApplicationDbContext>(
+        options => options.UseSqlServer(cn));
+
 
 var app = builder.Build();
 
