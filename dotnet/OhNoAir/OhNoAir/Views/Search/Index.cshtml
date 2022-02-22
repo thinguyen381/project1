@@ -68,98 +68,103 @@
 </script>
 
 }
-@if(Model.Departs != null || Model.Returns != null)
-{
-    <form asp-controller="Book" asp-action="Index">
-@if (Model.Departs != null)
+@if (Model.Departs != null || Model.Returns != null)
 {
     <div class="container border" style="padding:20px">
-        <p>Depart: </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Departs[0].FlightID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Departs[0].Date)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Departs[0].Price)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Departs)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FlightID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td><input name="DepartFlightID" type="radio" value="@item.FlightID"/></td>
-                        @*                    <td>
-                            <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
-                            <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
-                            </td>*@
-                    </tr>
-                }
-            </tbody>
-        </table>
-    </div>
-}
+        <form asp-controller="Book" asp-action="Index">
+            @if (Model.Departs != null)
+            {
+
+                <p>Depart: </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Departs[0].FlightID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Departs[0].Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Departs[0].Price)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Departs)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FlightID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td><input name="DepartFlightID" type="radio" value="@item.FlightID" /></td>
+                                @*                    <td>
+                                    <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
+                                    <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
+                                    </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
 
 
-@if (Model.Returns != null)
-{
-    <div class="container border" style="padding:20px">
-        <p>Return: </p>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Returns[0].FlightID)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Returns[0].Date)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Returns[0].Price)
-                    </th>
-                    <th></th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model.Returns)
-                {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FlightID)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Date)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Price)
-                        </td>
-                        <td><input name="ReturnFlightID" type="radio" value="@item.FlightID"/></td>
-                        @*<td>
-                            <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
-                            <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
-                            </td>*@
-                    </tr>
-                }
-            </tbody>
-        </table>
+            @if (Model.Returns != null)
+            {
+
+                <p>Return: </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Returns[0].FlightID)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Returns[0].Date)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Returns[0].Price)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model.Returns)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.FlightID)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Date)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Price)
+                                </td>
+                                <td><input name="ReturnFlightID" type="radio" value="@item.FlightID" /></td>
+                                @*<td>
+                                    <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
+                                    <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
+                                    </td>*@
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            }
+            <div>
+                <input type="submit" value="Book" class="btn btn-primary" />
+            </div>
+
+        </form>
     </div>
-}
-<input type="submit" value="Book" class="btn btn-primary" />
-</form>
 }
 
