@@ -1,0 +1,75 @@
+﻿@model OhNoAir.Models.Tracking
+
+
+<div class="container border" style="padding:20px">
+
+
+    <form asp-action="Index">
+
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Tracking ID:
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for=TrackingID class="form-control" />
+            </div>
+        </div>
+
+        <div class="form-group row" style="padding:5px">
+            <div class="col-3">
+                <input type="submit" value="Track" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </form>
+</div>
+
+
+@if (Model != null)
+{
+    @if (Model.DepartureFlight != null)
+    {
+        <h3>Departs:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-1">FlightID</th>
+                    <th class="col-1">From</th>
+                    <th class="col-1">To</th>
+                    <th class="col-1">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-1">@Html.DisplayFor(model => model.DepartureFlight.FlightID)</td>
+                    <td class="col-1">@Html.DisplayFor(model => model.From)</td>
+                    <td class="col-1">@Html.DisplayFor(model => model.To)</td>
+                    <td class="col-1">@Html.DisplayFor(model => model.DepartureFlight.Date)</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+
+    @if (Model.ReturnFlight != null)
+    {
+        <h3>Returns:</h3>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-1">FlightID</th>
+                    <th class="col-1">From</th>
+                    <th class="col-1">To</th>
+                    <th class="col-1">Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.FlightID)</td>
+                    <td class="col-1">@Html.DisplayFor(model => model.To)</td>
+                    <td class="col-1">@Html.DisplayFor(model => model.From)</td>
+                    <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.Date)</td>
+                </tr>
+            </tbody>
+        </table>
+    }
+}

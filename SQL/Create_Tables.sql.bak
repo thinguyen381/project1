@@ -1,5 +1,11 @@
 use project1
 go
+
+Create table Destination(
+	DestinationID int,
+	DestinationName varchar(200)
+)
+
 Create table Flight(
 	FlightID int,
 	Date DateTime,
@@ -8,34 +14,23 @@ Create table Flight(
 	ToID int
 )
 
-Create table Invoice(
-	InvoiceID int,
-	CustomerID int
+
+
+
+
+create table Payment(
+PaymentID int Identity(1,1) Primary Key,
+TotalAmount decimal(18,2),
+CardNumber nvarchar(200),
+CardHolder nvarchar(200),
+CVV nvarchar(6),
+Expiration nvarchar(10)
 )
 
-Create table Line(
-	LineID int,
-	OrderID int,
-	ScheduleID int
+create table [Order](
+OrderID int Identity(1,1) Primary Key,
+TrackingID uniqueidentifier,
+PaymentID int,
+Constraint FK_OrderPayment Foreign Key (PaymentID)
+References Payment(PaymentID)
 )
-
-Create table Destination(
-	DestinationID int,
-	DestinationName varchar(200)
-)
-
-
---Create table Class(
---	ClassID int,
---	ClassName varchar(50),
---	[Service] varchar(200)
---)
-
---Create table Customer(
---	CustomerID int,
---	Name varchar(100),
---	Email varchar(100),
---	CreditCardNumber varchar(16),
-
---)
-

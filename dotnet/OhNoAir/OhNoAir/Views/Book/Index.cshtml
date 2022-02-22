@@ -1,0 +1,53 @@
+﻿@model OhNoAir.Models.Book
+
+<h3>Departs:</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-1">@Html.DisplayNameFor(model => model.DepartFlight.FlightID)</th>
+            <th class="col-1">@Html.DisplayNameFor(model => model.DepartFlight.Price)</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td class="col-1">@Html.DisplayFor(model => model.DepartFlight.FlightID)</td>
+            <td class="col-1">@Html.DisplayFor(model => model.DepartFlight.Price)</td>
+        </tr>
+    </tbody>
+</table>
+
+@if (Model.ReturnFlight != null)
+{
+    <h3>Returns:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-1">@Html.DisplayNameFor(model => model.ReturnFlight.FlightID)</th>
+                <th class="col-1">@Html.DisplayNameFor(model => model.ReturnFlight.Price)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.FlightID)</td>
+                <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.Price)</td>
+            </tr>
+        </tbody>
+
+    </table>
+}
+
+
+<table class="table table-striped">
+    <tbody>
+        <tr>
+            <th class="col-1">Total:</th>
+            <th class="col-1">@Html.DisplayFor(model => model.TotalAmount)</th>
+        </tr>
+    </tbody>
+</table>
+
+<form asp-controller="Payment" asp-action="Index">
+    <input type="text" hidden="hidden" value="@Model.DepartFlight.FlightID" name="DepartFlightID"/>
+    <input type="text" hidden="hidden" value="@Model.ReturnFlight?.FlightID" name="ReturnFlightID"/>
+    <input type="submit" value="Checkout as Guest" class="btn btn-primary"/>
+</form>

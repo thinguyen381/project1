@@ -1,0 +1,56 @@
+﻿@model OhNoAir.Models.PaymentView
+
+<div class="container border" style="padding:20px">
+
+
+    <form  asp-action="Pay">
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Total:
+            </div>
+            <div class="col-5 ">
+                <label asp-for=TotalAmount class="form-control">@Model.TotalAmount</label>                  
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Card Number:
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for=CardNumber class="form-control" />            
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Card Holder:
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for=CardHolder class="form-control" />  
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                CVV:
+            </div>
+            <div class="col-5">
+               <input type="text" asp-for=CVV class="form-control" />  
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-2">
+                Expiration (mm/yy):
+            </div>
+            <div class="col-5">
+               <input type="text" asp-for=Expiration class="form-control" />  
+            </div>
+        </div>
+        <input asp-for=DepartFlightID value="@Model.DepartFlightID" hidden="hidden" />
+        <input asp-for=ReturnFlightID value="@Model.ReturnFlightID" hidden="hidden" />
+        <div class="form-group row" style="padding:5px">
+            <div class="col-3">
+                <input type="submit" value="Pay" class="btn btn-primary" />
+            </div>
+        </div>
+
+    </form>
+</div>

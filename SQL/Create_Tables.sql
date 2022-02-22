@@ -18,17 +18,22 @@ Create table Flight(
 
 
 
---Create table Class(
---	ClassID int,
---	ClassName varchar(50),
---	[Service] varchar(200)
---)
+create table Payment(
+PaymentID int Identity(1,1) Primary Key,
+TotalAmount decimal(18,2),
+CardNumber nvarchar(200),
+CardHolder nvarchar(200),
+CVV nvarchar(6),
+Expiration nvarchar(10)
+)
 
---Create table Customer(
---	CustomerID int,
---	Name varchar(100),
---	Email varchar(100),
---	CreditCardNumber varchar(16),
 
---)
-
+create table [Order](
+OrderID int Identity(1,1) Primary Key,
+TrackingID uniqueidentifier,
+DepartFlightID int NULL,
+ReturnFlightID int NULL,
+PaymentID int,
+Constraint FK_OrderPayment Foreign Key (PaymentID)
+References Payment(PaymentID)
+)

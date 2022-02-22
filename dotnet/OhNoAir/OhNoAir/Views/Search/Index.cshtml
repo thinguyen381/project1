@@ -68,7 +68,9 @@
 </script>
 
 }
-
+@if(Model.Departs != null || Model.Returns != null)
+{
+    <form asp-controller="Book" asp-action="Index">
 @if (Model.Departs != null)
 {
     <div class="container border" style="padding:20px">
@@ -101,6 +103,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
+                        <td><input name="DepartFlightID" type="checkbox" value="@item.FlightID"/></td>
                         @*                    <td>
                             <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
                             <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
@@ -145,6 +148,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
+                        <td><input name="ReturnFlightID" type="checkbox" value="@item.FlightID"/></td>
                         @*<td>
                             <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
                             <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
@@ -155,3 +159,7 @@
         </table>
     </div>
 }
+<input type="submit" value="Book" class="btn btn-primary" />
+</form>
+}
+
