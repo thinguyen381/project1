@@ -103,7 +103,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
-                        <td><input name="DepartFlightID" type="checkbox" value="@item.FlightID"/></td>
+                        <td><input name="DepartFlightID" type="radio" value="@item.FlightID"/></td>
                         @*                    <td>
                             <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
                             <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
@@ -148,7 +148,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Price)
                         </td>
-                        <td><input name="ReturnFlightID" type="checkbox" value="@item.FlightID"/></td>
+                        <td><input name="ReturnFlightID" type="radio" value="@item.FlightID"/></td>
                         @*<td>
                             <a asp-action="Book" asp-route-id="@item.FlightID">Book</a> |
                             <a asp-action="Details" asp-route-id="@item.FlightID">Details</a>
