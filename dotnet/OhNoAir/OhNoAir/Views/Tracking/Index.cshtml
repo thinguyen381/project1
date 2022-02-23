@@ -1,6 +1,7 @@
 ﻿@model OhNoAir.Models.Tracking
 
 
+
 <div class="container border" style="padding:20px">
 
 
@@ -25,51 +26,108 @@
 </div>
 
 
+
+
+
+@if (Model?.DepartureFlight != null)
+{
+    <h3>Departs:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-1">FlightID</th>
+                <th class="col-1">From</th>
+                <th class="col-1">To</th>
+                <th class="col-1">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-1">@Html.DisplayFor(model => model.DepartureFlight.FlightID)</td>
+                <td class="col-1">@Html.DisplayFor(model => model.From)</td>
+                <td class="col-1">@Html.DisplayFor(model => model.To)</td>
+                <td class="col-1">@Html.DisplayFor(model => model.DepartureFlight.Date)</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
+@if (Model?.ReturnFlight != null)
+{
+    <h3>Returns:</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-1">FlightID</th>
+                <th class="col-1">From</th>
+                <th class="col-1">To</th>
+                <th class="col-1">Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.FlightID)</td>
+                <td class="col-1">@Html.DisplayFor(model => model.To)</td>
+                <td class="col-1">@Html.DisplayFor(model => model.From)</td>
+                <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.Date)</td>
+            </tr>
+        </tbody>
+    </table>
+}
+
 @if (Model != null)
 {
-    @if (Model.DepartureFlight != null)
-    {
-        <h3>Departs:</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="col-1">FlightID</th>
-                    <th class="col-1">From</th>
-                    <th class="col-1">To</th>
-                    <th class="col-1">Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="col-1">@Html.DisplayFor(model => model.DepartureFlight.FlightID)</td>
-                    <td class="col-1">@Html.DisplayFor(model => model.From)</td>
-                    <td class="col-1">@Html.DisplayFor(model => model.To)</td>
-                    <td class="col-1">@Html.DisplayFor(model => model.DepartureFlight.Date)</td>
-                </tr>
-            </tbody>
-        </table>
-    }
+    <div class="container border" style="padding:20px">
+        <div>You can add email to send notification.</div><br />
+        <form asp-action="SendEmail" class="form-horizontal" method="Post">
+            <input type="text" hidden="hidden" name="TrackingID" value="@Model.TrackingID" />
+            <div class="control-group">
+                <div class="inc">
+                    <div class="controls">
+                        <input type="text" name="email" placeholder="Add email" />
+                        <a style="margin-left: 50px" class="btn btn-info" id="append" name="append">
+                            Add Textbox
+                        </a>
+                        <br>
+                        <br>
+                    </div>
+                </div>
+                <input type="submit" class="btn btn-info" name="submit" value="Send Email" />
+            </div>
+        </form>
+        @if (Model != null && Model.IsEmailSent)
+        {
+            <div>Email(s) sent successfully!</div>
+        }
+    </div>
 
-    @if (Model.ReturnFlight != null)
-    {
-        <h3>Returns:</h3>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th class="col-1">FlightID</th>
-                    <th class="col-1">From</th>
-                    <th class="col-1">To</th>
-                    <th class="col-1">Date</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.FlightID)</td>
-                    <td class="col-1">@Html.DisplayFor(model => model.To)</td>
-                    <td class="col-1">@Html.DisplayFor(model => model.From)</td>
-                    <td class="col-1">@Html.DisplayFor(model => model.ReturnFlight.Date)</td>
-                </tr>
-            </tbody>
-        </table>
+
+
+    @section Scripts{
+<script>
+
+      jQuery(document).ready( function () {
+          $("#append").click( function(e) {
+
+          $(".inc").append('<div class="controls"><input type="text" name="email" placeholder="Add email" /><a href="#" style="margin-left: 50px" class="remove_this btn btn-danger">Remove</a><br><br></div>');
+          return false;
+          });
+
+      jQuery(document).on('click', '.remove_this', function() {
+          jQuery(this).parent().remove();
+          return false;
+          });
+      $("input[type=submit]").click(function(e) {
+
+        $(this).next("[name=textbox]")
+        .val(
+          $.map($(".inc :text"), function(el) {
+            return el.value
+          }).join(",\n")
+        )
+      })
+    });
+</script>
     }
 }
+

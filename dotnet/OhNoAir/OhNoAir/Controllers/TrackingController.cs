@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OhNoAir.Data;
 using OhNoAir.Models;
+using OhNoAir.UseCase;
+using System.Net;
+using System.Net.Mail;
 
 namespace OhNoAir.Controllers
 {
@@ -37,6 +40,33 @@ namespace OhNoAir.Controllers
 
 
             return View(tracking);
+        }
+
+        public IActionResult SendEmail(List<string>? email, Guid? TrackingID)
+        {
+            Order order = _context.Order.FirstOrDefault(o => o.TrackingID == TrackingID);
+            if (order == null) return View("NotFound");
+
+            List<Destination> destinations = _context.Destination.ToList();
+
+            Flight departFlight = _context.Flight.FirstOrDefault(f => f.FlightID == order.DepartFlightID);
+            Flight returnFlight = _context.Flight.FirstOrDefault(f => f.FlightID == order.ReturnFlightID);
+
+
+            Tracking tracking = new Tracking
+            {
+                TrackingID = (Guid)TrackingID,
+                DepartureFlight = departFlight,
+                ReturnFlight = returnFlight,
+                From = destinations.FirstOrDefault(d => d.DestinationID == departFlight.FromID)?.DestinationName,
+                To = departFlight?.ToID != null ? destinations.FirstOrDefault(d => d.DestinationID == departFlight.ToID)?.DestinationName : null,
+                IsEmailSent = true
+            };
+
+            SendEmailUseCase emailUseCase = new SendEmailUseCase();
+            emailUseCase.SendEmail(email, tracking);
+
+            return View("Index",tracking);
         }
     }
 }

@@ -1,4 +1,62 @@
-﻿@model OhNoAir.Models.Order
+﻿@model OhNoAir.Models.Tracking
 
-Congratulation! Flights have been booked successfully!
-Your Tracking ID is @Model.TrackingID
+<div class="container border" style="padding:20px">
+    Congratulation! Flights have been booked successfully!
+    Your Tracking ID is @Model.TrackingID
+</div>
+
+<div class="container border" style="padding:20px">
+    <div>You can add email to send notification.</div><br />
+    <form asp-action="SendEmail" class="form-horizontal" method="Post">
+        <input type="text" hidden="hidden" name="TrackingID" value="@Model.TrackingID" />
+        <div class="control-group">
+            <div class="inc">
+                <div class="controls">
+                    <input type="text" name="email" placeholder="Add email" />
+                    <a style="margin-left: 50px" class="btn btn-info" id="append" name="append">
+                        Add Textbox
+                    </a>
+                    <br>
+                    <br>
+                </div>
+            </div>
+            <input type="submit" class="btn btn-info" name="submit" value="Send Email" />
+        </div>
+    </form>
+
+    @if (Model != null && Model.IsEmailSent)
+    {
+        <div>Email(s) sent successfully!</div>
+    }
+</div>
+
+
+
+@section Scripts{
+<script>
+
+      jQuery(document).ready( function () {
+          $("#append").click( function(e) {
+
+          $(".inc").append('<div class="controls"><input type="text" name="email" placeholder="Add email" /><a href="#" style="margin-left: 50px" class="remove_this btn btn-danger">Remove</a><br><br></div>');
+          return false;
+          });
+
+      jQuery(document).on('click', '.remove_this', function() {
+          jQuery(this).parent().remove();
+          return false;
+          });
+      $("input[type=submit]").click(function(e) {
+
+        $(this).next("[name=textbox]")
+        .val(
+          $.map($(".inc :text"), function(el) {
+            return el.value
+          }).join(",\n")
+        )
+      })
+    });
+</script>
+    }
+
+

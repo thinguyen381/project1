@@ -8,7 +8,7 @@ namespace OhNoAir.Models
         public List<Flight> Returns { get; set; }
         public List<Destination> Destinations { get; set; }
         public int From { get; set; }
-        public string To { get; set; }
+        public int To { get; set; }
         public DateTime? DepartDate { get; set; }
         public DateTime? ReturnDate { get; set; }
     }
