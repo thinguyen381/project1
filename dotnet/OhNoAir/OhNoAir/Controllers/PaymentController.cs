@@ -67,14 +67,14 @@ namespace OhNoAir.Controllers
             _context.Add(newOrder);
             _context.SaveChanges();
 
-            List<Destination> destinations = _context.Destination.ToList();
+            List<Airport> destinations = _context.Airport.ToList();
             Tracking tracking = new Tracking
             {
                 TrackingID = trackingID,
                 DepartureFlight = departFlight,
                 ReturnFlight = returnFlight,
-                From = destinations.FirstOrDefault(d => d.DestinationID == departFlight.FromID)?.DestinationName,
-                To = departFlight?.ToID != null ? destinations.FirstOrDefault(d => d.DestinationID == departFlight.ToID)?.DestinationName : null,
+                From = destinations.FirstOrDefault(d => d.AirportID == departFlight.FromID)?.AirportName,
+                To = departFlight?.ToID != null ? destinations.FirstOrDefault(d => d.AirportID == departFlight.ToID)?.AirportName : null,
 
             };
 
@@ -86,7 +86,7 @@ namespace OhNoAir.Controllers
             Order order = _context.Order.FirstOrDefault(o => o.TrackingID == TrackingID);
             if (order == null) return View("NotFound");
 
-            List<Destination> destinations = _context.Destination.ToList();
+            List<Airport> destinations = _context.Airport.ToList();
 
             Flight departFlight = _context.Flight.FirstOrDefault(f => f.FlightID == order.DepartFlightID);
             Flight returnFlight = _context.Flight.FirstOrDefault(f => f.FlightID == order.ReturnFlightID);
@@ -97,8 +97,8 @@ namespace OhNoAir.Controllers
                 TrackingID = (Guid)TrackingID,
                 DepartureFlight = departFlight,
                 ReturnFlight = returnFlight,
-                From = destinations.FirstOrDefault(d => d.DestinationID == departFlight.FromID)?.DestinationName,
-                To = departFlight?.ToID != null ? destinations.FirstOrDefault(d => d.DestinationID == departFlight.ToID)?.DestinationName : null,
+                From = destinations.FirstOrDefault(d => d.AirportID == departFlight.FromID)?.AirportName,
+                To = departFlight?.ToID != null ? destinations.FirstOrDefault(d => d.AirportID == departFlight.ToID)?.AirportName : null,
                 IsEmailSent = true
             };
 

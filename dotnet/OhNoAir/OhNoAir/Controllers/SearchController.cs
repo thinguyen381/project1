@@ -18,7 +18,7 @@ namespace OhNoAir.Controllers
         {
             var search = new Search()
             {
-                Destinations = _context.Destination.ToList(),
+                Airports = _context.Airport.ToList(),
                 DepartDate = departDate ?? DateTime.Now,
                 ReturnDate = returnDate ?? DateTime.Now
             };

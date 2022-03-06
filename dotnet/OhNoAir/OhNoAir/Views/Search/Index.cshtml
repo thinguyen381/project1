@@ -16,7 +16,7 @@
                 Departure City:
             </div>
             <div class="col-5 ">
-                <select asp-for=From asp-items="@(new SelectList(Model.Destinations, "DestinationID", "DestinationName"))" class="form-control">
+                <select asp-for=From asp-items="@(new SelectList(Model.Airports, "AirportID", "AirportName"))" class="form-control">
                     <option selected value="">Choose...</option>
                 </select>
             </div>
@@ -26,7 +26,7 @@
                 Destination City:
             </div>
             <div class="col-5">
-                <select asp-for=To asp-items="@(new SelectList(Model.Destinations, "DestinationID", "DestinationName"))" class="form-control">
+                <select asp-for=To asp-items="@(new SelectList(Model.Airports, "AirportID", "AirportName"))" class="form-control">
                     <option selected value="">Choose...</option>
                 </select>
             </div>
