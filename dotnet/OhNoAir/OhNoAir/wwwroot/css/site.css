@@ -14,5 +14,10 @@ html {
 }
 
 body {
-  margin-bottom: 60px;
+    background-image: url(../images/background.jpg);
+    background-size: cover; /* <------ */
+    background-repeat: no-repeat;
+    background-position: center center;
+    margin-bottom: 60px;
 }
+
