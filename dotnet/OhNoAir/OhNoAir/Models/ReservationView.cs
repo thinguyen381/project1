@@ -1,8 +1,8 @@
 ﻿namespace OhNoAir.Models
 {
-    public class OrderView
+    public class ReservationView
     {
-        public Order Order { get; set; }
+        public Reservation Reservation { get; set; }
         public bool IsEmailSent { get; set; }
     }
 }

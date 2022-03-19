@@ -18,7 +18,7 @@ namespace OhNoAir.Controllers
         {
             if (trackingID == null) return View();
             
-            Order order = _context.Order.FirstOrDefault(o => o.TrackingID == trackingID);
+            Reservation order = _context.Reservation.FirstOrDefault(o => o.TrackingID == trackingID);
             if (order == null) return View("NotFound");
 
             List<Airport> destinations = _context.Airport.ToList();
@@ -44,7 +44,7 @@ namespace OhNoAir.Controllers
 
         public IActionResult SendEmail(List<string>? email, Guid? TrackingID)
         {
-            Order order = _context.Order.FirstOrDefault(o => o.TrackingID == TrackingID);
+            Reservation order = _context.Reservation.FirstOrDefault(o => o.TrackingID == TrackingID);
             if (order == null) return View("NotFound");
 
             List<Airport> destinations = _context.Airport.ToList();

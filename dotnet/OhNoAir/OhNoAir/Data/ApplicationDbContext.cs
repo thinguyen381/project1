@@ -12,6 +12,6 @@ namespace OhNoAir.Data
         public DbSet<Flight> Flight { get; set; }
         public DbSet<Airport> Airport { get; set; }
         public DbSet<Payment> Payment { get; set; }
-        public DbSet<Order> Order { get; set; }
+        public DbSet<Reservation> Reservation { get; set; }
     }
 }

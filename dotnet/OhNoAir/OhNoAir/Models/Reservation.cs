@@ -1,8 +1,8 @@
 ﻿namespace OhNoAir.Models
 {
-    public class Order
+    public class Reservation
     {
-        public int OrderID { get; set; }
+        public int ReservationID { get; set; }
         public Guid? TrackingID { get; set; }
         public int PaymentID { get; set; }
         public int? DepartFlightID { get; set; }
