@@ -23,6 +23,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Tracking" asp-action="Index">Tracking</a>
                         </li>
+                       
                         @if (this.User.Claims.FirstOrDefault(c => c.Type == "IsAdmin" && c.Value == "true") != null)
                         {
                             <li class="nav-item">
@@ -30,6 +31,12 @@
                             </li>
                         }
                     </ul>
+                </div>
+                <div>
+                    @if (!this.User.Identity.IsAuthenticated)
+                    {
+                         <a class="nav-link text-dark" asp-area="" asp-controller="Account" asp-action="Register">Register</a>
+                    }
                 </div>
                 <div class="mr-2">
                     @if (this.User.Identity.IsAuthenticated)
