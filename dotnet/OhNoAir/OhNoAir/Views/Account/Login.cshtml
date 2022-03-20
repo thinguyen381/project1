@@ -1,0 +1,29 @@
+﻿@model OhNoAir.Models.AccountViewModel
+
+<div class="container border" style="padding:20px">
+    @using (Html.BeginForm("Login", "Account", FormMethod.Post))
+    {
+        <div class="form-group row" style="padding:5px">
+            <div class="col-3">
+                UserName:
+            </div>
+            <div class="col-5">
+                @Html.TextBoxFor(model => model.Account.UserName, new {@class = "form-control", required = "required"})
+            </div>
+        </div>
+        <div class="form-group row" style="padding:5px">
+            <div class="col-3">
+                Password:
+            </div>
+            <div class="col-5">
+                @Html.PasswordFor(model => model.Account.Password, new {@class = "form-control", required = "required"})
+            </div>
+        </div>
+        <div>
+            <input type="submit" class="btn btn-primary" value="Login" />
+        </div>
+    }
+</div>
+@if(!string.IsNullOrEmpty(Model?.Error)){
+    <div class="text-danger">@Model.Error</div>
+}
