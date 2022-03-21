@@ -1,6 +1,6 @@
 ﻿namespace OhNoAir.Models
 {
-    public class AccountViewModel
+    public class AccountView
     {
         public Account Account { get; set; }
         public string Error { get; set; }

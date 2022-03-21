@@ -13,7 +13,7 @@ namespace OhNoAir.Controllers
         {
             _context = context;
         }
-        public IActionResult Register(AccountViewModel accountModel)
+        public IActionResult Register(AccountView accountModel)
         {
 
             if(!string.IsNullOrEmpty(accountModel?.Account?.UserName) 
@@ -48,7 +48,7 @@ namespace OhNoAir.Controllers
             return View();
         }
 
-        public async Task<IActionResult> Login(AccountViewModel accountModel)
+        public async Task<IActionResult> Login(AccountView accountModel)
         {
 
 
