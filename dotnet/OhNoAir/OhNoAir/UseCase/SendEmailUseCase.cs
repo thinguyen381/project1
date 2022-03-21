@@ -6,7 +6,7 @@ namespace OhNoAir.UseCase
 {
     public class SendEmailUseCase
     {
-        public bool SendEmail(List<string> emails, Tracking tracking)
+        public bool SendEmail(List<string> emails, TrackingView tracking)
         {
             bool success = true;
             try

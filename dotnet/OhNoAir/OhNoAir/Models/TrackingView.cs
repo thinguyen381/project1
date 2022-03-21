@@ -1,6 +1,6 @@
 ﻿namespace OhNoAir.Models
 {
-    public class Tracking
+    public class TrackingView
     {
         public Flight DepartureFlight { get; set; }
         public Flight ReturnFlight { get; set; }

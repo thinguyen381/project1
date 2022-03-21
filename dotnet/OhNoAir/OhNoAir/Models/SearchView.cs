@@ -2,7 +2,7 @@
 
 namespace OhNoAir.Models
 {
-    public class Search
+    public class SearchView
     {
         public List<Flight> Departs { get; set; }
         public List<Flight> Returns { get; set; }

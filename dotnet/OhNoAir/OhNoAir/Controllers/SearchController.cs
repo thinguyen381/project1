@@ -16,7 +16,7 @@ namespace OhNoAir.Controllers
         }
         public IActionResult Index(int? from, int? to, DateTime? departDate, DateTime? returnDate)
         {
-            var search = new Search()
+            var search = new SearchView()
             {
                 Airports = _context.Airport.ToList(),
                 DepartDate = departDate ?? DateTime.Now,

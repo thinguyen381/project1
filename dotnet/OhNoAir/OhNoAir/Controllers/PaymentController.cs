@@ -68,7 +68,7 @@ namespace OhNoAir.Controllers
             _context.SaveChanges();
 
             List<Airport> destinations = _context.Airport.ToList();
-            Tracking tracking = new Tracking
+            TrackingView tracking = new TrackingView
             {
                 TrackingID = trackingID,
                 DepartureFlight = departFlight,
@@ -92,7 +92,7 @@ namespace OhNoAir.Controllers
             Flight returnFlight = _context.Flight.FirstOrDefault(f => f.FlightID == order.ReturnFlightID);
 
 
-            Tracking tracking = new Tracking
+            TrackingView tracking = new TrackingView
             {
                 TrackingID = (Guid)TrackingID,
                 DepartureFlight = departFlight,

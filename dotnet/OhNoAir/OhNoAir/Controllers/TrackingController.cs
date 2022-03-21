@@ -27,7 +27,7 @@ namespace OhNoAir.Controllers
             Flight returnFlight = _context.Flight.FirstOrDefault(f => f.FlightID == order.ReturnFlightID);
 
 
-            Tracking tracking = new Tracking
+            TrackingView tracking = new TrackingView
             {
                 TrackingID = (Guid)trackingID,
                 DepartureFlight = departFlight,
@@ -53,7 +53,7 @@ namespace OhNoAir.Controllers
             Flight returnFlight = _context.Flight.FirstOrDefault(f => f.FlightID == order.ReturnFlightID);
 
 
-            Tracking tracking = new Tracking
+            TrackingView tracking = new TrackingView
             {
                 TrackingID = (Guid)TrackingID,
                 DepartureFlight = departFlight,
