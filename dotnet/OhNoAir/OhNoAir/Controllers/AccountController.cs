@@ -77,7 +77,7 @@ namespace OhNoAir.Controllers
 
                     if (this.HttpContext.Session.Keys.Contains("DepartFlightID"))
                     {
-                        return RedirectToAction("Pay", "Payment");
+                        return RedirectToAction("Index", "Payment");
                     }
 
                     return RedirectToAction("Index", "Search");
