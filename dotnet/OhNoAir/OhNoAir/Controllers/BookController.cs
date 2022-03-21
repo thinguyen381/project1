@@ -27,5 +27,17 @@ namespace OhNoAir.Controllers
 
             return View(book);
         }
+
+        public IActionResult LoginAndBook(int DepartFlightID, int ReturnFlightID, bool loginFirst)
+        {
+            HttpContext.Session.SetInt32("DepartFlightID", DepartFlightID);
+            HttpContext.Session.SetInt32("ReturnFlightID", ReturnFlightID);
+
+
+            if (loginFirst)
+                return RedirectToAction("Login", "Account");
+            else
+                return RedirectToAction("Index", "Payment");
+        }
     }
 }

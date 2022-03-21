@@ -46,8 +46,18 @@
     </tbody>
 </table>
 
-<form asp-controller="Payment" asp-action="Index">
+@*<form asp-controller="Book" asp-action="LoginAndBook">
     <input type="text" hidden="hidden" value="@Model.DepartFlight.FlightID" name="DepartFlightID"/>
     <input type="text" hidden="hidden" value="@Model.ReturnFlight?.FlightID" name="ReturnFlightID"/>
+    <input type="text" hidden="hidden" value="false" name="loginFirst"/>
     <input type="submit" value="Checkout as Guest" class="btn btn-primary"/>
+</form>*@
+
+<br/>
+
+<form asp-controller="Book" asp-action="LoginAndBook">
+    <input type="text" hidden="hidden" value="@Model.DepartFlight.FlightID" name="DepartFlightID"/>
+    <input type="text" hidden="hidden" value="@Model.ReturnFlight?.FlightID" name="ReturnFlightID"/>
+     <input type="text" hidden="hidden" value="true" name="loginFirst"/>
+    <input type="submit" value="Login & Book" class="btn btn-primary"/>
 </form>

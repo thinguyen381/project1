@@ -12,8 +12,11 @@ namespace OhNoAir.Controllers
         {
             _context = context;
         }
-        public IActionResult Index(int? DepartFlightID, int? ReturnFlightID)
+        public IActionResult Index()
         {
+            int? DepartFlightID = this.HttpContext.Session.GetInt32("DepartFlightID");
+            int? ReturnFlightID = this.HttpContext.Session.GetInt32("ReturnFlightID");
+
             Flight departFlight = DepartFlightID != null ? _context.Flight.First(f => f.FlightID == DepartFlightID) : null;
             Flight returnFlight = ReturnFlightID != null ? _context.Flight.First(f => f.FlightID == ReturnFlightID) : null;
 
@@ -29,6 +32,7 @@ namespace OhNoAir.Controllers
             return View(payment);
         }
 
+
         public IActionResult Pay(PaymentView payment)
         {
             Flight departFlight = payment?.DepartFlightID != null ? _context.Flight.First(f => f.FlightID == payment.DepartFlightID) : null;
@@ -43,6 +47,14 @@ namespace OhNoAir.Controllers
             {
                 payment.Error = "Error: Unable to pay using payment input!";
                 return View("Index", payment);
+            }
+
+            //Payment success
+
+            int? accountID = null;
+            if (this.User.Identity.IsAuthenticated && int.TryParse(this.User.Claims.Where(c => c.Type == "AccountID").FirstOrDefault()?.Value, out int a))
+            {
+                accountID = a;
             }
 
             var newPayment = new Payment
@@ -62,7 +74,9 @@ namespace OhNoAir.Controllers
                 TrackingID = trackingID,
                 PaymentID = newPayment.PaymentID,
                 DepartFlightID = departFlight.FlightID,
-                ReturnFlightID = returnFlight?.FlightID
+                ReturnFlightID = returnFlight?.FlightID,
+                AccountID = accountID
+
             };
             _context.Add(newOrder);
             _context.SaveChanges();

@@ -75,17 +75,21 @@ namespace OhNoAir.Controllers
 
                     await HttpContext.SignInAsync("MyCookieAuth", claimsPrincipal);
 
+                    if (this.HttpContext.Session.Keys.Contains("DepartFlightID"))
+                    {
+                        return RedirectToAction("Pay", "Payment");
+                    }
+
                     return RedirectToAction("Index", "Search");
                 }
 
             }
 
-
-
-
-
             return View();
         }
+
+       
+
 
         public async Task<IActionResult> Logout()
         {
